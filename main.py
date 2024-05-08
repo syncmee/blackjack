@@ -40,23 +40,24 @@ def scoreadd():
 
 def scorecheck_n():
     global end_game
-    if my_score > computers_score and my_score < 21:
+    n_score = 21 - my_score
+    n_score_computer = 21 - computers_score
+    if n_score > n_score_computer: 
         print("You won!")
-        # print(f"Your final hand: {my_cards}, current score: {my_score}")
+        print(f"Your final hand: {my_cards}, current score: {my_score}")
         print(f"Computer's final hand: {computers_cards}, computers score {computers_score}")
         end_game = True
-    if computers_score > my_score  and computers_score < 21:
+    elif n_score_computer > n_score:
         print("You Lose")
-        # print(f"Your final hand: {my_cards}, current score: {my_score}")
+        print(f"Your final hand: {my_cards}, current score: {my_score}")
         print(f"Computer's final hand: {computers_cards}, computers score {computers_score}")
         end_game = True
-
-        
 print(logo)
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 my_cards = []
 computers_cards = [] 
-
+n_score = 0
+n_score_computer= 0
 my_score = 0
 computers_score = 0 
 while not end_game:
@@ -77,7 +78,10 @@ while not end_game:
                 computers_score = 0 
                 my_score = 0
                 scoreadd()
+                print(f"Your cards: {my_cards}, your score: {my_score}")
+                print(f"Computer's first card: {computers_cards[0]}")
                 scorecheck()
+                
             if continuegame == "n":
                 computers_cards.append(random.choice(cards))
                 computers_score = 0 
@@ -85,8 +89,7 @@ while not end_game:
                 scoreadd()
                 scorecheck()
                 scorecheck_n()
-            print(f"Your cards: {my_cards}, your score: {my_score}")
-            scorecheck()
+                
             
     else:
         end_game = True
