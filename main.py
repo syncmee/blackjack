@@ -5,8 +5,16 @@ import math
 import os
 
 from art import logo
-
+print(logo)
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+my_cards = []
+computers_cards = [] 
+n_score = 0
+n_score_computer= 0
+my_score = 0
+computers_score = 0 
 end_game = False
+reference = 21
 def scorecheck():
     global end_game
     if my_score > 21:
@@ -38,28 +46,23 @@ def scoreadd():
     for m in computers_cards:   
         computers_score += m
 
-def scorecheck_n():
+
+def closer_to_reference(reference, my_score, computers_score):
     global end_game
-    n_score = 21 - my_score
-    n_score_computer = 21 - computers_score
-    if n_score > n_score_computer: 
-        print("You won!")
+    diff1 = (reference - my_score)
+    diff2 = (reference - computers_score)
+
+    if diff1 < diff2 and my_score < 21:
+        print("You win")
         print(f"Your final hand: {my_cards}, current score: {my_score}")
         print(f"Computer's final hand: {computers_cards}, computers score {computers_score}")
         end_game = True
-    elif n_score_computer > n_score:
+    elif diff2 < diff1 and computers_score < 21:
         print("You Lose")
         print(f"Your final hand: {my_cards}, current score: {my_score}")
         print(f"Computer's final hand: {computers_cards}, computers score {computers_score}")
         end_game = True
-print(logo)
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-my_cards = []
-computers_cards = [] 
-n_score = 0
-n_score_computer= 0
-my_score = 0
-computers_score = 0 
+
 while not end_game:
     start_game = input("Do you want to play a game of black jack? Type 'y' or 'n': ")
     if start_game == "y":
@@ -88,7 +91,7 @@ while not end_game:
                 my_score = 0
                 scoreadd()
                 scorecheck()
-                scorecheck_n()
+                closer_to_reference(reference, my_score, computers_score)
                 
             
     else:
